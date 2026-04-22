@@ -11,8 +11,8 @@ Aplikasi web interaktif untuk mempelajari dan mensimulasikan **Finite State Auto
 
 ## 🗂️ Struktur Soal
 
-| Soal | Jenis | Deskripsi |
-|------|-------|-----------|
+| Soal   | Jenis                    | Deskripsi                       |
+| ------ | ------------------------ | ------------------------------- |
 | Soal 1 | Diagram → Tabel Transisi | DFA atas `{0,1}` dengan 4 state |
 | Soal 2 | Tabel → Diagram Transisi | DFA atas `{a,b}` dengan 3 state |
 | Soal 3 | Tabel → Diagram Transisi | DFA atas `{a,b}` dengan 4 state |
@@ -48,9 +48,9 @@ Output akan ada di folder `dist/`.
 1. Push project ini ke GitHub
 2. Buka [vercel.com](https://vercel.com) → **New Project** → Import repo
 3. Vercel otomatis mendeteksi Vite — tidak perlu konfigurasi tambahan:
-   - **Framework:** Vite
-   - **Build Command:** `npm run build`
-   - **Output Directory:** `dist`
+    - **Framework:** Vite
+    - **Build Command:** `npm run build`
+    - **Output Directory:** `dist`
 4. Klik **Deploy**
 
 ## 🛠️ Tech Stack
@@ -74,5 +74,5 @@ tugas-2/
 
 ## 📚 Referensi
 
-- Sipser, M. (2012). *Introduction to the Theory of Computation* (3rd ed.)
-- Hopcroft, J. E., Motwani, R., & Ullman, J. D. (2006). *Introduction to Automata Theory, Languages, and Computation*
+- Sipser, M. (2012). _Introduction to the Theory of Computation_ (3rd ed.)
+- Hopcroft, J. E., Motwani, R., & Ullman, J. D. (2006). _Introduction to Automata Theory, Languages, and Computation_
