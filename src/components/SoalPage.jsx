@@ -365,6 +365,30 @@ export default function SoalPage({ activeDFA, setPage, setSoalTab }) {
                             >
                                 {activeDFA.explanation}
                             </p>
+                            {(activeDFA.accepted || activeDFA.rejected) && (
+                                <div style={{ marginTop: 14, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                                    {activeDFA.accepted && (
+                                        <div style={{ flex: 1, minWidth: 180, background: 'rgba(67,233,123,0.06)', border: '1px solid rgba(67,233,123,0.2)', borderRadius: 10, padding: '10px 14px' }}>
+                                            <div style={{ fontSize: 10, color: '#43e97b', fontFamily: 'monospace', letterSpacing: 1, marginBottom: 8, textTransform: 'uppercase' }}>Diterima</div>
+                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
+                                                {activeDFA.accepted.map((s) => (
+                                                    <span key={s} style={{ background: 'rgba(67,233,123,0.12)', border: '1px solid rgba(67,233,123,0.3)', borderRadius: 6, padding: '3px 9px', fontSize: 12, fontFamily: 'monospace', color: '#43e97b' }}>{s}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {activeDFA.rejected && (
+                                        <div style={{ flex: 1, minWidth: 180, background: 'rgba(255,101,132,0.06)', border: '1px solid rgba(255,101,132,0.2)', borderRadius: 10, padding: '10px 14px' }}>
+                                            <div style={{ fontSize: 10, color: '#ff6584', fontFamily: 'monospace', letterSpacing: 1, marginBottom: 8, textTransform: 'uppercase' }}>Ditolak</div>
+                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
+                                                {activeDFA.rejected.map((s) => (
+                                                    <span key={s} style={{ background: 'rgba(255,101,132,0.12)', border: '1px solid rgba(255,101,132,0.3)', borderRadius: 6, padding: '3px 9px', fontSize: 12, fontFamily: 'monospace', color: '#ff6584' }}>{s}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                             <div style={{ marginTop: 12 }}>
                                 <div
                                     style={{

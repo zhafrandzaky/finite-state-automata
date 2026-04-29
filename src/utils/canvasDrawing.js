@@ -118,91 +118,106 @@ function drawEdge(ctx, p1, p2, label, R, offset, isActive) {
     }
 }
 
-function drawSelfLoop(ctx, cx, cy, label, R, isActive) {
+function drawSelfLoop(ctx, cx, cy, label, R, isActive, side = 'top') {
     const col = isActive ? '#f9ca24' : '#ff9f43'
     ctx.strokeStyle = col
     ctx.lineWidth = isActive ? 2.5 : 1.6
-    ctx.beginPath()
-    ctx.moveTo(cx - 14, cy - R + 4)
-    ctx.bezierCurveTo(
-        cx - 14,
-        cy - R - 46,
-        cx + 14,
-        cy - R - 46,
-        cx + 14,
-        cy - R + 4,
-    )
-    ctx.stroke()
-    arrowHead(ctx, cx + 14, cy - R + 3, Math.PI * 0.3, col)
     ctx.fillStyle = isActive ? '#f9ca24' : '#a9a3ff'
     ctx.font = `bold 12px monospace`
-    ctx.textAlign = 'center'
-    ctx.fillText(label, cx, cy - R - 32)
+
+    if (side === 'right') {
+        ctx.beginPath()
+        ctx.moveTo(cx + R - 4, cy - 14)
+        ctx.bezierCurveTo(cx + R + 46, cy - 14, cx + R + 46, cy + 14, cx + R - 4, cy + 14)
+        ctx.stroke()
+        arrowHead(ctx, cx + R - 3, cy + 14, Math.PI * 0.8, col)
+        ctx.textAlign = 'left'
+        ctx.fillText(label, cx + R + 20, cy + 4)
+    } else {
+        ctx.beginPath()
+        ctx.moveTo(cx - 14, cy - R + 4)
+        ctx.bezierCurveTo(cx - 14, cy - R - 46, cx + 14, cy - R - 46, cx + 14, cy - R + 4)
+        ctx.stroke()
+        arrowHead(ctx, cx + 14, cy - R + 3, Math.PI * 0.3, col)
+        ctx.textAlign = 'center'
+        ctx.fillText(label, cx, cy - R - 32)
+    }
 }
 
 export function drawFSACanvas(canvas, dfa, activeState = null, traceEdge = null) {
     if (!canvas) return
     const ctx = canvas.getContext('2d')
-    const W = canvas.width,
-        H = canvas.height
-    ctx.clearRect(0, 0, W, H)
+    const W = canvas.width
+    const H = canvas.height
 
-    // Background
+    // ── Background
+    ctx.clearRect(0, 0, W, H)
     ctx.fillStyle = '#080c1a'
     ctx.fillRect(0, 0, W, H)
 
-    // Grid dots
-    ctx.fillStyle = 'rgba(108,99,255,0.06)'
-    for (let x = 20; x < W; x += 30)
+    // ── Grid dots
+    ctx.fillStyle = 'rgba(108,99,255,0.05)'
+    for (let x = 20; x < W; x += 30) {
         for (let y = 20; y < H; y += 30) {
             ctx.beginPath()
             ctx.arc(x, y, 1, 0, Math.PI * 2)
             ctx.fill()
         }
+    }
 
     const R = 28
     const pos = dfa.nodePos
 
-    // Group transitions by (from, to) pair to merge labels
+    // ── Step 1: Bangun edgeMap — group semua transisi berdasarkan (from, to)
+    // Ini memastikan δ(q2,a)=q2 dan δ(q2,b)=q2 digabung jadi satu edge "a,b"
     const edgeMap = {}
     dfa.states.forEach((_, from) => {
+        if (!dfa.delta[from]) return
         dfa.alphabet.forEach((sym) => {
             const to = dfa.delta[from][sym]
+            if (to === undefined || to === null) return
             const key = `${from}-${to}`
-            if (!edgeMap[key]) edgeMap[key] = { from, to, labels: [] }
+            if (!edgeMap[key]) {
+                edgeMap[key] = { from, to, labels: [] }
+            }
             edgeMap[key].labels.push(sym)
         })
     })
 
-    // Draw edges (one arrow per (from,to) pair with merged label)
+    // ── Step 2: Gambar edges — satu panah per pasangan (from, to)
     Object.values(edgeMap).forEach(({ from, to, labels }) => {
         const label = labels.join(',')
         const isActive =
-            traceEdge &&
+            traceEdge !== null &&
+            traceEdge !== undefined &&
             traceEdge.from === from &&
             labels.includes(traceEdge.sym)
         if (from === to) {
-            drawSelfLoop(ctx, pos[from].x, pos[from].y, label, R, isActive)
-        } else {
-            const reverseKey = `${to}-${from}`
-            const hasReverse = !!edgeMap[reverseKey]
-            drawEdge(
-                ctx,
-                pos[from],
-                pos[to],
-                label,
-                R,
-                hasReverse ? 16 : 0,
-                isActive,
+            // Self-loop: use right side if any edge comes in from above
+            const hasIncomingFromAbove = Object.values(edgeMap).some(
+                (e) => e.to === from && e.from !== from && pos[e.from].y <= pos[from].y,
             )
+            const side = hasIncomingFromAbove ? 'right' : 'top'
+            drawSelfLoop(ctx, pos[from].x, pos[from].y, label, R, isActive, side)
+        } else {
+            // Cek apakah ada edge balik (untuk offset kurva)
+            const reverseKey = `${to}-${from}`
+            const hasReverse = reverseKey in edgeMap
+            drawEdge(ctx, pos[from], pos[to], label, R, hasReverse ? 16 : 0, isActive)
         }
     })
 
-    // Draw nodes
+    // ── Step 3: Gambar nodes di atas edges
     dfa.states.forEach((name, i) => {
-        const isStart = i === dfa.start
-        const isFinal = dfa.finals.includes(i)
-        const isActive = activeState === i
-        drawNode(ctx, pos[i].x, pos[i].y, name, isStart, isFinal, isActive, R)
+        drawNode(
+            ctx,
+            pos[i].x,
+            pos[i].y,
+            name,
+            i === dfa.start,
+            dfa.finals.includes(i),
+            activeState === i,
+            R,
+        )
     })
 }

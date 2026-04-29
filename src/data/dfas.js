@@ -22,7 +22,9 @@ export const DFAS = [
             { x: 310, y: 250 },
         ],
         explanation:
-            "DFA ini menerima string biner yang mengandung jumlah '1' genap. State q₀ = genap (final), q₁ = ganjil, q₂/q₃ = state intermediate.",
+            "DFA ini menerima string biner yang mengandung jumlah '1' genap (termasuk nol '1'). State q₀ melacak jumlah '1' genap (final state), q₁ melacak jumlah '1' ganjil, sedangkan q₂ dan q₃ adalah state intermediate yang bergantung pada kombinasi input '0' dan '1' yang diterima.",
+        accepted: ['ε (string kosong)', '00', '11', '0011', '1100', '1010'],
+        rejected: ['1', '01', '001', '101', '0001', '10'],
         examples: ['00', '11', '0011', '1010', '101', '0110'],
     },
     {
@@ -42,7 +44,9 @@ export const DFAS = [
             { x: 270, y: 230 },
         ],
         explanation:
-            "DFA ini menerima string atas {a,b} yang jumlah 'ab'-nya genap. State q₂ adalah dead state — sekali masuk tidak bisa diterima.",
+            "DFA ini menerima string atas {a,b} yang mengandung jumlah substring 'ab' genap (termasuk nol). State q₀ = final (jumlah 'ab' genap), q₁ = baru baca 'a', menunggu 'b', q₂ = dead state (trap) — string yang masuk ke q₂ tidak dapat diterima.",
+        accepted: ['ε (string kosong)', 'ab', 'abab', 'ba', 'bab', 'aabb'],
+        rejected: ['a', 'b', 'aba', 'aab', 'bb', 'bba'],
         examples: ['ab', 'ba', 'abab', 'a', 'b', 'aab'],
     },
     {
@@ -68,7 +72,9 @@ export const DFAS = [
             { x: 420, y: 160 },
         ],
         explanation:
-            "DFA ini menerima string atas {a,b} yang tidak mengandung 'bbb' (tiga b berturut-turut). q₃ adalah trap state untuk pola bbb.",
+            "DFA ini menerima semua string atas {a,b} yang tidak mengandung substring 'bbb' (tiga 'b' berturut-turut). State q₀/q₁/q₂ melacak jumlah 'b' konsekutif saat ini (0, 1, atau 2). Sekali masuk ke q₃ (trap state), string pasti ditolak karena 'bbb' sudah terbentuk.",
+        accepted: ['a', 'b', 'bb', 'ab', 'abb', 'abba', 'aabb'],
+        rejected: ['bbb', 'abbb', 'bbba', 'abbba', 'bbbab', 'aabbb'],
         examples: ['a', 'b', 'bb', 'bbb', 'ab', 'abb', 'abbb'],
     },
     {
@@ -88,7 +94,9 @@ export const DFAS = [
             { x: 270, y: 230 },
         ],
         explanation:
-            'DFA yang sama dengan Soal 2 Tugas 2. Tugas 3 meminta menggambar ulang diagram dari tabel dengan menerapkan 4 langkah konversi dari Pertemuan 6.',
+            "DFA ini menerima string atas {a,b} yang mengandung jumlah substring 'ab' genap (termasuk nol). State q0 = final (jumlah 'ab' genap), q1 = baru baca 'a', menunggu 'b', q2 = dead state (trap) — string yang masuk ke q2 tidak dapat diterima.",
+        accepted: ['ε (string kosong)', 'ab', 'abab', 'ba', 'bab', 'aabb'],
+        rejected: ['a', 'b', 'aba', 'aab', 'bb', 'bba'],
         examples: ['ab', 'ba', 'abab', 'aba', 'b', 'aab'],
     },
     {
@@ -114,7 +122,9 @@ export const DFAS = [
             { x: 420, y: 160 },
         ],
         explanation:
-            'DFA yang sama dengan Soal 3 Tugas 2. Tugas 3 meminta menggambar ulang diagram dari tabel dengan menerapkan 4 langkah konversi dari Pertemuan 6.',
+            "DFA ini menerima semua string atas {a,b} yang tidak mengandung substring 'bbb' (tiga 'b' berturut-turut). State q0/q1/q2 melacak jumlah 'b' konsekutif saat ini (0, 1, atau 2). Sekali masuk ke q3 (trap state), string pasti ditolak karena 'bbb' sudah terbentuk.",
+        accepted: ['a', 'b', 'bb', 'ab', 'abb', 'abba', 'aabb'],
+        rejected: ['bbb', 'abbb', 'bbba', 'abbba', 'bbbab', 'aabbb'],
         examples: ['a', 'b', 'bb', 'bbb', 'ab', 'abb', 'abbb'],
     },
 ]
