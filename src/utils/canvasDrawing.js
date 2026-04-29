@@ -163,28 +163,39 @@ export function drawFSACanvas(canvas, dfa, activeState = null, traceEdge = null)
     const R = 28
     const pos = dfa.nodePos
 
-    // Draw edges
+    // Group transitions by (from, to) pair to merge labels
+    const edgeMap = {}
     dfa.states.forEach((_, from) => {
         dfa.alphabet.forEach((sym) => {
             const to = dfa.delta[from][sym]
-            const isActive =
-                traceEdge && traceEdge.from === from && traceEdge.sym === sym
-            if (from === to) {
-                drawSelfLoop(ctx, pos[from].x, pos[from].y, sym, R, isActive)
-            } else {
-                const reverse =
-                    dfa.delta[to] && Object.values(dfa.delta[to]).includes(from)
-                drawEdge(
-                    ctx,
-                    pos[from],
-                    pos[to],
-                    sym,
-                    R,
-                    reverse ? 16 : 0,
-                    isActive,
-                )
-            }
+            const key = `${from}-${to}`
+            if (!edgeMap[key]) edgeMap[key] = { from, to, labels: [] }
+            edgeMap[key].labels.push(sym)
         })
+    })
+
+    // Draw edges (one arrow per (from,to) pair with merged label)
+    Object.values(edgeMap).forEach(({ from, to, labels }) => {
+        const label = labels.join(',')
+        const isActive =
+            traceEdge &&
+            traceEdge.from === from &&
+            labels.includes(traceEdge.sym)
+        if (from === to) {
+            drawSelfLoop(ctx, pos[from].x, pos[from].y, label, R, isActive)
+        } else {
+            const reverseKey = `${to}-${from}`
+            const hasReverse = !!edgeMap[reverseKey]
+            drawEdge(
+                ctx,
+                pos[from],
+                pos[to],
+                label,
+                R,
+                hasReverse ? 16 : 0,
+                isActive,
+            )
+        }
     })
 
     // Draw nodes
