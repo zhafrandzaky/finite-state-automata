@@ -73,7 +73,7 @@ export const DFAS = [
         ],
         explanation:
             "DFA ini menerima semua string atas {a,b} yang tidak mengandung substring 'bbb' (tiga 'b' berturut-turut). State q₀/q₁/q₂ melacak jumlah 'b' konsekutif saat ini (0, 1, atau 2). Sekali masuk ke q₃ (trap state), string pasti ditolak karena 'bbb' sudah terbentuk.",
-        accepted: ['a', 'b', 'bb', 'ab', 'abb', 'abba', 'aabb'],
+        accepted: ['ε (string kosong)', 'a', 'b', 'bb', 'ab', 'abb', 'abba'],
         rejected: ['bbb', 'abbb', 'bbba', 'abbba', 'bbbab', 'aabbb'],
         examples: ['a', 'b', 'bb', 'bbb', 'ab', 'abb', 'abbb'],
     },
@@ -123,7 +123,7 @@ export const DFAS = [
         ],
         explanation:
             "DFA ini menerima semua string atas {a,b} yang tidak mengandung substring 'bbb' (tiga 'b' berturut-turut). State q0/q1/q2 melacak jumlah 'b' konsekutif saat ini (0, 1, atau 2). Sekali masuk ke q3 (trap state), string pasti ditolak karena 'bbb' sudah terbentuk.",
-        accepted: ['a', 'b', 'bb', 'ab', 'abb', 'abba', 'aabb'],
+        accepted: ['ε (string kosong)', 'a', 'b', 'bb', 'ab', 'abb', 'abba'],
         rejected: ['bbb', 'abbb', 'bbba', 'abbba', 'bbbab', 'aabbb'],
         examples: ['a', 'b', 'bb', 'bbb', 'ab', 'abb', 'abbb'],
     },
