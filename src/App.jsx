@@ -5,7 +5,7 @@ import SoalPage from './components/SoalPage'
 import { DFAS } from './data/dfas'
 
 export default function App() {
-    const [page, setPage] = useState('tutorial') // "tutorial" | "soal-0" | "soal-1" | "soal-2"
+    const [page, setPage] = useState('tutorial') // "tutorial" | "soal-0" ... "soal-4"
     const [soalTab, setSoalTab] = useState('diagram') // "diagram" | "tabel" | "uji"
 
     const activeDFA = page.startsWith('soal-')
@@ -59,35 +59,59 @@ export default function App() {
                 >
                     FSA Lab
                 </div>
-                {[
-                    { id: 'tutorial', label: 'Tutorial', icon: <BookOpen size={15} /> },
-                    { id: 'soal-0', label: 'Soal 1' },
-                    { id: 'soal-1', label: 'Soal 2' },
-                    { id: 'soal-2', label: 'Soal 3' },
-                ].map((n) => (
+                {/* Tutorial */}
+                {[{ id: 'tutorial', label: 'Tutorial', icon: <BookOpen size={15} /> }].map((n) => (
                     <button
                         key={n.id}
-                        onClick={() => {
-                            setPage(n.id)
-                            setSoalTab('diagram')
-                        }}
+                        onClick={() => { setPage(n.id); setSoalTab('diagram') }}
                         style={{
-                            background: 'none',
-                            border: 'none',
-                            padding: '16px 18px',
-                            cursor: 'pointer',
-                            fontSize: 14,
+                            background: 'none', border: 'none', padding: '16px 18px',
+                            cursor: 'pointer', fontSize: 14,
                             fontWeight: page === n.id ? 700 : 400,
                             color: page === n.id ? '#6c63ff' : '#6b7299',
                             borderBottom: `2px solid ${page === n.id ? '#6c63ff' : 'transparent'}`,
-                            whiteSpace: 'nowrap',
-                            fontFamily: 'sans-serif',
-                            transition: 'all 0.2s',
+                            whiteSpace: 'nowrap', fontFamily: 'sans-serif', transition: 'all 0.2s',
                         }}
-                    >                        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                            {n.icon && n.icon}
-                            {n.label}
+                    >
+                        <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                            {n.icon} {n.label}
                         </span>
+                    </button>
+                ))}
+                {/* Tugas 2 */}
+                <span style={{ fontSize: 10, color: '#3a4070', fontFamily: 'monospace', letterSpacing: 2, textTransform: 'uppercase', padding: '0 8px', whiteSpace: 'nowrap', borderLeft: '1px solid #1e2240', marginLeft: 4 }}>Tugas 2</span>
+                {DFAS.filter((d) => d.tugas === 'Tugas 2').map((d) => (
+                    <button
+                        key={`soal-${d.id}`}
+                        onClick={() => { setPage(`soal-${d.id}`); setSoalTab('diagram') }}
+                        style={{
+                            background: 'none', border: 'none', padding: '16px 18px',
+                            cursor: 'pointer', fontSize: 14,
+                            fontWeight: page === `soal-${d.id}` ? 700 : 400,
+                            color: page === `soal-${d.id}` ? '#6c63ff' : '#6b7299',
+                            borderBottom: `2px solid ${page === `soal-${d.id}` ? '#6c63ff' : 'transparent'}`,
+                            whiteSpace: 'nowrap', fontFamily: 'sans-serif', transition: 'all 0.2s',
+                        }}
+                    >
+                        {d.soal}
+                    </button>
+                ))}
+                {/* Tugas 3 */}
+                <span style={{ fontSize: 10, color: '#3a4070', fontFamily: 'monospace', letterSpacing: 2, textTransform: 'uppercase', padding: '0 8px', whiteSpace: 'nowrap', borderLeft: '1px solid #1e2240', marginLeft: 4 }}>Tugas 3</span>
+                {DFAS.filter((d) => d.tugas === 'Tugas 3').map((d) => (
+                    <button
+                        key={`soal-${d.id}`}
+                        onClick={() => { setPage(`soal-${d.id}`); setSoalTab('diagram') }}
+                        style={{
+                            background: 'none', border: 'none', padding: '16px 18px',
+                            cursor: 'pointer', fontSize: 14,
+                            fontWeight: page === `soal-${d.id}` ? 700 : 400,
+                            color: page === `soal-${d.id}` ? '#6c63ff' : '#6b7299',
+                            borderBottom: `2px solid ${page === `soal-${d.id}` ? '#6c63ff' : 'transparent'}`,
+                            whiteSpace: 'nowrap', fontFamily: 'sans-serif', transition: 'all 0.2s',
+                        }}
+                    >
+                        {d.soal}
                     </button>
                 ))}
             </nav>

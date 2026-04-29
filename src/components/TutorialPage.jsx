@@ -2,6 +2,7 @@ import { useState } from 'react'
 import {
     Bot, Settings2, CircleDot, Table2, Scale, PlayCircle,
     Rocket, ChevronLeft, ChevronRight,
+    LayoutList, Binary, Lightbulb, Shapes, Map, PenLine, CheckCircle2, BookOpen,
 } from 'lucide-react'
 import TheorySection from './TheorySection'
 import { THEORY } from '../data/theory'
@@ -15,6 +16,14 @@ const THEORY_ICONS = {
     table: <Table2 size={16} />,
     scale: <Scale size={16} />,
     play: <PlayCircle size={16} />,
+    'layout-list': <LayoutList size={16} />,
+    binary: <Binary size={16} />,
+    lightbulb: <Lightbulb size={16} />,
+    shapes: <Shapes size={16} />,
+    map: <Map size={16} />,
+    'pen-line': <PenLine size={16} />,
+    'check-circle-2': <CheckCircle2 size={16} />,
+    'book-open': <BookOpen size={16} />,
 }
 
 export default function TutorialPage({ setPage, setSoalTab }) {

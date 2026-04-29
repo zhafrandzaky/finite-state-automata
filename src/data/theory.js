@@ -3,6 +3,7 @@ export const THEORY = [
         id: 'apa-itu-fsa',
         title: 'Apa itu FSA?',
         icon: 'bot',
+        pertemuan: 5,
         content: [
             {
                 type: 'text',
@@ -45,6 +46,7 @@ export const THEORY = [
         title: 'Komponen FSA (5-Tupel)',
         tabLabel: 'Komponen',
         icon: 'settings',
+        pertemuan: 5,
         content: [
             {
                 type: 'text',
@@ -96,6 +98,7 @@ export const THEORY = [
         id: 'diagram-transisi',
         title: 'Diagram Transisi',
         icon: 'circle-dot',
+        pertemuan: 5,
         content: [
             {
                 type: 'text',
@@ -142,6 +145,7 @@ export const THEORY = [
         id: 'tabel-transisi',
         title: 'Tabel Transisi',
         icon: 'table',
+        pertemuan: 5,
         content: [
             {
                 type: 'text',
@@ -171,6 +175,7 @@ export const THEORY = [
         id: 'dfa-vs-nfa',
         title: 'DFA vs NFA',
         icon: 'scale',
+        pertemuan: 5,
         content: [
             {
                 type: 'text',
@@ -210,6 +215,7 @@ export const THEORY = [
         title: 'Cara Kerja: Membaca String',
         tabLabel: 'Cara Kerja',
         icon: 'play',
+        pertemuan: 5,
         content: [
             {
                 type: 'text',
@@ -261,6 +267,275 @@ export const THEORY = [
                 ],
                 result: 'DITOLAK',
                 reason: 'q₂ bukan final state',
+            },
+        ],
+    },
+    {
+        id: 'representasi',
+        title: 'Representasi Automata',
+        icon: 'layout-list',
+        pertemuan: 6,
+        content: [
+            {
+                type: 'text',
+                body: 'Sebuah DFA dapat direpresentasikan dalam dua bentuk yang saling ekuivalen: Tabel Transisi dan Diagram Transisi. Keduanya menyimpan informasi yang sama, namun cocok untuk konteks yang berbeda.',
+            },
+            {
+                type: 'comparison',
+                left: {
+                    title: 'Tabel Transisi',
+                    color: '#6c63ff',
+                    points: [
+                        'Bentuk tabular matriks dua dimensi',
+                        'Sistematis dan matematis — mudah ditulis secara formal',
+                        'Efisien untuk dikodekan dan diproses oleh program komputer',
+                        'Kelemahan: kurang intuitif bagi manusia untuk mensimulasikan rute panjang',
+                    ],
+                },
+                right: {
+                    title: 'Diagram Transisi',
+                    color: '#43e97b',
+                    points: [
+                        'Bentuk representasi visual graf berarah',
+                        'Intuitif — mudah dipahami secara sekilas',
+                        'Sangat mudah ditelusuri pergerakan statenya secara manual',
+                        'Kelemahan: terlihat sangat rumit jika jumlah state terlalu banyak',
+                    ],
+                },
+            },
+        ],
+    },
+    {
+        id: 'matriks-tabel',
+        title: 'Tabel Transisi: Definisi Matriks',
+        icon: 'binary',
+        pertemuan: 6,
+        content: [
+            {
+                type: 'text',
+                body: 'Tabel Transisi adalah format matriks dua dimensi dimana baris mewakili State saat ini, dan kolom mewakili himpunan Simbol Input yang diberikan.',
+            },
+            {
+                type: 'highlight',
+                body: 'Perpotongan antara baris dan kolom (isi sel matriks) mendeskripsikan secara pasti ke State Berikutnya mana mesin akan bergeser, mengikuti fungsi pemetaan transisi δ.',
+            },
+            {
+                type: 'text',
+                body: 'Simbol panah (->) menandakan awal eksekusi (start state), sedangkan tanda bintang (*) menandakan penerimaan akhir eksekusi (final state). Keduanya bisa muncul bersamaan.',
+            },
+            {
+                type: 'table-example',
+                title: 'Contoh struktur tabel dengan Σ={0,1}:',
+                headers: ['State (δ)', 'Input 0', 'Input 1'],
+                rows: [
+                    ['→ q0 (Start)', '...', '...', 'normal'],
+                    ['q1', 'q2', 'q1', 'normal'],
+                    ['* q2 (Final)', '...', '...', 'normal'],
+                ],
+                legend: [
+                    { symbol: '→', desc: 'Start state' },
+                    { symbol: '*', desc: 'Final state' },
+                    { symbol: '→*', desc: 'Start sekaligus Final' },
+                ],
+            },
+        ],
+    },
+    {
+        id: 'kenapa-konversi',
+        title: 'Mengapa Konversi Penting?',
+        icon: 'lightbulb',
+        pertemuan: 6,
+        content: [
+            {
+                type: 'text',
+                body: 'Kemampuan mengkonversi antara tabel transisi dan diagram transisi adalah skill fundamental dalam Teori Bahasa dan Automata. Ada tiga alasan utama mengapa konversi ini penting.',
+            },
+            {
+                type: 'analogy',
+                title: 'Tiga Alasan Utama',
+                items: [
+                    {
+                        icon: 'book-open',
+                        text: 'Kognisi Manusia: otak memproses gambar visual jauh lebih cepat daripada angka-angka tabular matriks. Diagram mempercepat pemahaman secara signifikan.',
+                    },
+                    {
+                        icon: 'book-open',
+                        text: 'Deteksi Anomali: melalui diagram, kita mudah mengidentifikasi dead state atau state yang tidak dapat dicapai (unreachable state).',
+                    },
+                    {
+                        icon: 'book-open',
+                        text: 'Presentasi Efektif: konversi mutlak diperlukan untuk dokumentasi akademik, diskusi tim, dan pembelajaran di ruang kelas.',
+                    },
+                ],
+            },
+            {
+                type: 'highlight',
+                body: 'Tabel efisien untuk mesin — Diagram efisien untuk manusia. Menguasai keduanya berarti kamu bisa berkomunikasi di kedua domain sekaligus.',
+            },
+        ],
+    },
+    {
+        id: 'komponen-visual',
+        title: 'Komponen Visual Diagram',
+        icon: 'shapes',
+        pertemuan: 6,
+        content: [
+            {
+                type: 'text',
+                body: 'Diagram transisi dibangun dari komponen-komponen visual yang memiliki makna spesifik. Memahami setiap simbol adalah kunci membaca dan menggambar diagram dengan benar.',
+            },
+            {
+                type: 'diagram-legend',
+                items: [
+                    { visual: 'circle',        label: 'State (Node)',        desc: 'Setiap entitas state digambar menggunakan sebuah lingkaran tunggal.' },
+                    { visual: 'double-circle', label: 'State Akhir (Final)', desc: 'Ditandai dengan lingkaran konsentris ganda sebagai indikator Final State.' },
+                    { visual: 'arrow-in',      label: 'State Awal (Start)',  desc: 'Ditandai dengan panah masuk dari ruang kosong tanpa node sumber.' },
+                    { visual: 'arrow',         label: 'Transisi (Edge)',     desc: 'Dilukiskan sebagai panah berarah beserta penamaan karakter inputnya.' },
+                    { visual: 'self-loop',     label: 'Self Loop',           desc: 'Panah yang kembali ke state yang sama, input tidak mengubah state.' },
+                    { visual: 'label',         label: 'Label Input',         desc: 'Karakter atau simbol input yang ditulis sebagai label pada setiap busur panah.' },
+                ],
+            },
+        ],
+    },
+    {
+        id: 'langkah-konversi',
+        title: 'Langkah-Langkah Konversi',
+        icon: 'map',
+        pertemuan: 6,
+        content: [
+            {
+                type: 'text',
+                body: 'Konversi dari Tabel Transisi ke Diagram Transisi mengikuti 4 langkah sistematis. Ikuti urutan ini untuk memastikan tidak ada informasi yang terlewat.',
+            },
+            {
+                type: 'steps',
+                items: [
+                    {
+                        step: '1',
+                        title: 'Identifikasi Start State',
+                        desc: 'Cari state yang ditandai → di kolom pertama tabel. Gambar lingkaran pertama, lalu beri panah lurus dari ruang kosong menujunya.',
+                    },
+                    {
+                        step: '2',
+                        title: 'Bentuk Semua Node',
+                        desc: 'Gambar seluruh lingkaran (node) yang tersisa untuk setiap state yang terdaftar di kolom pertama tabel. Posisikan secara merata.',
+                    },
+                    {
+                        step: '3',
+                        title: 'Tarik Garis Transisi',
+                        desc: 'Telusuri tabel baris per baris. Hubungkan antar node dengan panah berlabel simbol input sesuai kolomnya. Jika state tujuan = state asal, buat self-loop.',
+                    },
+                    {
+                        step: '4',
+                        title: 'Tandai Final State',
+                        desc: 'Ubah lingkaran state biasa menjadi lingkaran ganda untuk semua state yang ditandai * di tabel. Ini adalah Final State / Accepting State.',
+                    },
+                ],
+            },
+            {
+                type: 'highlight',
+                body: 'Tip verifikasi: Jumlah total panah harus sama dengan (jumlah state) × (jumlah simbol alfabet). Jika tidak cocok, ada transisi yang terlewat.',
+            },
+        ],
+    },
+    {
+        id: 'pemetaan-visual',
+        title: 'Proses Pemetaan Visual',
+        icon: 'pen-line',
+        pertemuan: 6,
+        content: [
+            {
+                type: 'text',
+                body: 'Mari ikuti proses pemetaan manual dari tabel ke diagram menggunakan contoh konkret. DFA: Q={q0,q1,q2}, Σ={a,b}, S=q0, F={q2}.',
+            },
+            {
+                type: 'table-example',
+                title: 'Tabel transisi yang akan dikonversi:',
+                headers: ['δ', 'a', 'b'],
+                rows: [
+                    ['→ q0', 'q0', 'q1', 'normal'],
+                    ['q1', 'q2', 'q1', 'normal'],
+                    ['* q2', 'q2', 'q2', 'normal'],
+                ],
+                legend: [
+                    { symbol: '→', desc: 'q0 adalah start state' },
+                    { symbol: '*', desc: 'q2 adalah final state' },
+                ],
+            },
+            {
+                type: 'steps',
+                items: [
+                    {
+                        step: '1',
+                        title: 'Mulai di q0',
+                        desc: "q0 adalah Start State (→). Gambar lingkaran q0 dan beri panah masuk. Input 'a' self-loop ke q0 sendiri, input 'b' menuju q1.",
+                    },
+                    {
+                        step: '2',
+                        title: 'Lanjut ke q1',
+                        desc: "Gambar lingkaran q1. Input 'b' self-loop ke q1 sendiri, input 'a' menuju q2. Tarik kedua panah tersebut.",
+                    },
+                    {
+                        step: '3',
+                        title: 'Terakhir q2',
+                        desc: "Gambar lingkaran q2. Baik input 'a' maupun 'b' kembali ke q2 sendiri. Buat self-loop dengan label 'a,b'.",
+                    },
+                    {
+                        step: '4',
+                        title: 'Tandai Final',
+                        desc: 'q2 ditandai * di tabel, jadi ubah lingkarannya menjadi lingkaran ganda. Diagram selesai dan siap diverifikasi.',
+                    },
+                ],
+            },
+            {
+                type: 'example-trace',
+                title: 'Verifikasi: 3 state × 2 simbol = 6 total transisi',
+                steps: [
+                    { from: 'q0', input: 'a', to: 'q0', note: 'self-loop' },
+                    { from: 'q0', input: 'b', to: 'q1', note: 'menuju q1' },
+                    { from: 'q1', input: 'a', to: 'q2', note: 'menuju q2' },
+                    { from: 'q1', input: 'b', to: 'q1', note: 'self-loop' },
+                    { from: 'q2', input: 'a', to: 'q2', note: 'self-loop' },
+                    { from: 'q2', input: 'b', to: 'q2', note: 'self-loop' },
+                ],
+                result: '6 transisi',
+                reason: 'semua terpetakan dengan benar',
+            },
+        ],
+    },
+    {
+        id: 'verifikasi',
+        title: 'Verifikasi Konversi',
+        icon: 'check-circle-2',
+        pertemuan: 6,
+        content: [
+            {
+                type: 'text',
+                body: 'Sebelum diagram dianggap selesai, lakukan checklist validasi untuk memastikan tidak ada informasi dari tabel yang tertinggal atau salah dipetakan.',
+            },
+            {
+                type: 'steps',
+                items: [
+                    {
+                        step: '1',
+                        title: 'Validasi Node',
+                        desc: 'Pastikan seluruh daftar state di kolom pertama tabel telah digambar menjadi lingkaran terpisah. Jumlah node di diagram = jumlah baris di tabel.',
+                    },
+                    {
+                        step: '2',
+                        title: 'Validasi Transisi',
+                        desc: 'Setiap kemungkinan cabang input wajib digambar dengan label dan panahnya. Jumlah panah = jumlah state × jumlah simbol alfabet.',
+                    },
+                    {
+                        step: '3',
+                        title: 'Validasi Simbol Khusus',
+                        desc: 'Pastikan Start state memiliki panah masuk dari luar (tanpa sumber), dan semua Final state menggunakan lingkaran ganda konsentris.',
+                    },
+                ],
+            },
+            {
+                type: 'highlight',
+                body: 'Konversi ini bukan sekadar tugas mekanis merubah bentuk, melainkan menerjemahkan abstraksi matematis ke dalam pemahaman yang jauh lebih intuitif.',
             },
         ],
     },

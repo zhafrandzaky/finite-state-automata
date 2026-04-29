@@ -1,4 +1,4 @@
-import { Bot, Settings2, CircleDot, Table2, Scale, PlayCircle, TrafficCone, CreditCard, Lock, Smartphone } from 'lucide-react'
+import { Bot, Settings2, CircleDot, Table2, Scale, PlayCircle, TrafficCone, CreditCard, Lock, Smartphone, LayoutList, Binary, Lightbulb, Shapes, Map, PenLine, CheckCircle2, BookOpen } from 'lucide-react'
 import DiagramLegendVisual from './DiagramLegendVisual'
 import { thStyle, tdStyle } from '../styles'
 
@@ -13,6 +13,14 @@ const ICON_MAP = {
     'credit-card': CreditCard,
     lock: Lock,
     smartphone: Smartphone,
+    'layout-list': LayoutList,
+    binary: Binary,
+    lightbulb: Lightbulb,
+    shapes: Shapes,
+    map: Map,
+    'pen-line': PenLine,
+    'check-circle-2': CheckCircle2,
+    'book-open': BookOpen,
 }
 
 function Icon({ name, size = 28 }) {
@@ -32,16 +40,23 @@ export default function TheorySection({ section }) {
                 }}
             >
                 <span style={{ fontSize: 28, color: '#9d97ff' }}><Icon name={section.icon} size={28} /></span>
-                <h2
-                    style={{
-                        fontSize: 22,
-                        fontWeight: 800,
-                        color: '#e8eaf6',
-                        margin: 0,
-                    }}
-                >
-                    {section.title}
-                </h2>
+                <div>
+                    {section.pertemuan && (
+                        <div style={{ fontSize: 10, color: section.pertemuan === 6 ? '#43e97b' : '#6c63ff', fontFamily: 'monospace', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 2 }}>
+                            Pertemuan {section.pertemuan}
+                        </div>
+                    )}
+                    <h2
+                        style={{
+                            fontSize: 22,
+                            fontWeight: 800,
+                            color: '#e8eaf6',
+                            margin: 0,
+                        }}
+                    >
+                        {section.title}
+                    </h2>
+                </div>
             </div>
             {section.content.map((block, bi) => {
                 if (block.type === 'text')

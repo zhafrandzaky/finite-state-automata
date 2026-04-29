@@ -383,18 +383,9 @@ export default function SoalPage({ activeDFA, setPage, setSoalTab }) {
                                         flexWrap: 'wrap',
                                     }}
                                 >
-                                    {activeDFA.id === 0 &&
-                                        ['00', '11', '0011', '1010', '101', '0110'].map(
-                                            (s) => <ExampleChip key={s} str={s} />,
-                                        )}
-                                    {activeDFA.id === 1 &&
-                                        ['ab', 'ba', 'abab', 'a', 'b', 'aab'].map(
-                                            (s) => <ExampleChip key={s} str={s} />,
-                                        )}
-                                    {activeDFA.id === 2 &&
-                                        ['a', 'b', 'bb', 'bbb', 'ab', 'abb', 'abbb'].map(
-                                            (s) => <ExampleChip key={s} str={s} />,
-                                        )}
+                                    {activeDFA.examples
+                                        ? activeDFA.examples.map((s) => <ExampleChip key={s} str={s} />)
+                                        : null}
                                 </div>
                             </div>
                         </div>
@@ -435,7 +426,7 @@ export default function SoalPage({ activeDFA, setPage, setSoalTab }) {
                             <ChevronLeft size={15} /> {DFAS[activeDFA.id - 1].soal}
                         </button>
                     )}
-                    {activeDFA.id < 2 && (
+                    {activeDFA.id < DFAS.length - 1 && (
                         <button
                             onClick={() =>
                                 setPage(`soal-${activeDFA.id + 1}`)

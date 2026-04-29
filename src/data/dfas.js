@@ -1,6 +1,7 @@
 export const DFAS = [
     {
         id: 0,
+        tugas: 'Tugas 2',
         soal: 'Soal 1',
         title: 'Diagram → Tabel Transisi',
         task: 'Buatlah tabel transisi dari diagram DFA berikut.',
@@ -22,9 +23,11 @@ export const DFAS = [
         ],
         explanation:
             "DFA ini menerima string biner yang mengandung jumlah '1' genap. State q₀ = genap (final), q₁ = ganjil, q₂/q₃ = state intermediate.",
+        examples: ['00', '11', '0011', '1010', '101', '0110'],
     },
     {
         id: 1,
+        tugas: 'Tugas 2',
         soal: 'Soal 2',
         title: 'Tabel → Diagram Transisi',
         task: 'Gambarkan diagram transisi dari DFA berikut.',
@@ -40,9 +43,11 @@ export const DFAS = [
         ],
         explanation:
             "DFA ini menerima string atas {a,b} yang jumlah 'ab'-nya genap. State q₂ adalah dead state — sekali masuk tidak bisa diterima.",
+        examples: ['ab', 'ba', 'abab', 'a', 'b', 'aab'],
     },
     {
         id: 2,
+        tugas: 'Tugas 2',
         soal: 'Soal 3',
         title: 'Tabel → Diagram Transisi',
         task: 'Gambarkan diagram transisi dari DFA berikut.',
@@ -64,5 +69,52 @@ export const DFAS = [
         ],
         explanation:
             "DFA ini menerima string atas {a,b} yang tidak mengandung 'bbb' (tiga b berturut-turut). q₃ adalah trap state untuk pola bbb.",
+        examples: ['a', 'b', 'bb', 'bbb', 'ab', 'abb', 'abbb'],
+    },
+    {
+        id: 3,
+        tugas: 'Tugas 3',
+        soal: 'Soal 1',
+        title: 'Tabel → Diagram Transisi',
+        task: 'Gambarkan diagram transisi dari DFA berikut. Q={q0,q1,q2}, Σ={a,b}, S=q0, F={q0}.',
+        states: ['q0', 'q1', 'q2'],
+        alphabet: ['a', 'b'],
+        start: 0,
+        finals: [0],
+        delta: { 0: { a: 1, b: 2 }, 1: { a: 2, b: 0 }, 2: { a: 2, b: 2 } },
+        nodePos: [
+            { x: 120, y: 160 },
+            { x: 270, y: 90 },
+            { x: 270, y: 230 },
+        ],
+        explanation:
+            'DFA yang sama dengan Soal 2 Tugas 2. Tugas 3 meminta menggambar ulang diagram dari tabel dengan menerapkan 4 langkah konversi dari Pertemuan 6.',
+        examples: ['ab', 'ba', 'abab', 'aba', 'b', 'aab'],
+    },
+    {
+        id: 4,
+        tugas: 'Tugas 3',
+        soal: 'Soal 2',
+        title: 'Tabel → Diagram Transisi',
+        task: 'Gambarkan diagram transisi dari DFA berikut. Q={q0,q1,q2,q3}, Σ={a,b}, S=q0, F={q0,q1,q2}.',
+        states: ['q0', 'q1', 'q2', 'q3'],
+        alphabet: ['a', 'b'],
+        start: 0,
+        finals: [0, 1, 2],
+        delta: {
+            0: { a: 0, b: 1 },
+            1: { a: 0, b: 2 },
+            2: { a: 0, b: 3 },
+            3: { a: 3, b: 2 },
+        },
+        nodePos: [
+            { x: 80, y: 160 },
+            { x: 210, y: 160 },
+            { x: 340, y: 160 },
+            { x: 420, y: 160 },
+        ],
+        explanation:
+            'DFA yang sama dengan Soal 3 Tugas 2. Tugas 3 meminta menggambar ulang diagram dari tabel dengan menerapkan 4 langkah konversi dari Pertemuan 6.',
+        examples: ['a', 'b', 'bb', 'bbb', 'ab', 'abb', 'abbb'],
     },
 ]
