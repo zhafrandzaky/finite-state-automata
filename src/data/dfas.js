@@ -97,7 +97,7 @@ export const DFAS = [
             "DFA ini menerima string atas {a,b} yang mengandung jumlah substring 'ab' genap (termasuk nol). State q0 = final (jumlah 'ab' genap), q1 = baru baca 'a', menunggu 'b', q2 = dead state (trap) — string yang masuk ke q2 tidak dapat diterima.",
         accepted: ['ε (string kosong)', 'ab', 'abab', 'ba', 'bab', 'aabb'],
         rejected: ['a', 'b', 'aba', 'aab', 'bb', 'bba'],
-        examples: ['ab', 'ba', 'abab', 'aba', 'b', 'aab'],
+        examples: ['ab', 'ba', 'abab', 'a', 'b', 'aab'],
     },
     {
         id: 4,
